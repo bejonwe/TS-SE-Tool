@@ -752,6 +752,21 @@ namespace TS_SE_Tool
             comboBoxPrevProfiles.DisplayMember = "ProfileName";
             comboBoxPrevProfiles.DataSource = combDT;
 
+            //Check if another folder contains profiles
+            while (!comboBoxProfiles.Enabled)
+            {
+                //Only increase the index if there are items left
+                if (comboBoxPrevProfiles.SelectedIndex < comboBoxPrevProfiles.Items.Count - 1)
+                {
+                    comboBoxPrevProfiles.SelectedIndex++;
+                } 
+                else
+                {
+                    MessageBox.Show("No profiles found");
+                    break;
+                }
+            }
+
 
             if (comboBoxPrevProfiles.Items.Count > 0)
             {
@@ -904,8 +919,6 @@ namespace TS_SE_Tool
                 buttonProfilesAndSavesOpenSaveFolder.Enabled = false;
                 buttonMainDecryptSave.Enabled = false;
                 buttonMainLoadSave.Enabled = false;
-
-                MessageBox.Show("No profiles found");
             }
         }
 
