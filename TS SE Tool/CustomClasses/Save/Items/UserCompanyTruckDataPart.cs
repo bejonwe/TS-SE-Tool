@@ -18,21 +18,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TS_SE_Tool.CustomClasses;
 
 namespace TS_SE_Tool
 {
-    public class UserCompanyTruckData
+    public class UserCompanyTruckDataPart
     {
-        public UserCompanyTruckData()
+        public UserCompanyTruckDataPart()
         {
 
         }
 
-        public List<UserCompanyTruckDataPart> Parts = new List<UserCompanyTruckDataPart>();
-        public string TruckType { get; set; } = "fromsave";
-        public bool Main { get; set; } = true;
-        public bool Users { get; set; } = true;
-        public string TruckProfitLogs { get; set; } = null;
+        public UserCompanyTruckDataPart(string _PartType)
+        {
+            PartType = _PartType;
+        }
+
+        public UserCompanyTruckDataPart(string _PartType, string _PartNameless)
+        {
+            PartType = _PartType;
+            PartNameless = _PartNameless;
+        }
+
+        public string PartNameless { get; set; } = "";
+        public List<string> PartData { get; set; } = new List<string>();
+        public string PartType { get; set; } = "";
     }
 }

@@ -94,10 +94,14 @@ namespace TS_SE_Tool
                                 DistanceMultiplier = DistanceMultipliers[ProgSettingsV.DistanceMes];                                
                                 break;
                             }
-                        case "CurrencyMes":
+                        case "CurrencyMesETS2":
                             {
-                                ProgSettingsV.CurrencyMes = line.Split(new char[] { '=' })[1];
-                                //CurrencyMultiplier = CurrencyMultipliers[ProgSettingsV.CurrencyMes];
+                                ProgSettingsV.CurrencyMesETS2 = line.Split(new char[] { '=' })[1];
+                                break;
+                            }
+                        case "CurrencyMesATS":
+                            {
+                                ProgSettingsV.CurrencyMesATS = line.Split(new char[] { '=' })[1];
                                 break;
                             }
                         case "CustomPathGame":
@@ -514,16 +518,7 @@ namespace TS_SE_Tool
             }
 
             newEntries = newEntries.Distinct().ToList();
-
-            /*
-            string language = ProgSettingsV.Language;
-
-            if (language != "Default")
-                language = language += "\\";
-
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\lang\" + language + "companies_translate.txt"))
-                language = "";
-            */
+            
             try
             {
                 using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\lang\Default\companies_translate.txt", true))
@@ -559,15 +554,7 @@ namespace TS_SE_Tool
             }
 
             newEntries = newEntries.Distinct().ToList();
-            /*
-            string language = ProgSettingsV.Language;
 
-            if (language != "Default")
-                language = language += "\\";
-
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\lang\" + language + "cities_translate.txt"))
-                language = "";
-                */
             try
             {
                 using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\lang\Default\cities_translate.txt", true))
@@ -603,15 +590,7 @@ namespace TS_SE_Tool
             }
 
             newEntries = newEntries.Distinct().ToList();
-            /*
-            string language = ProgSettingsV.Language;
 
-            if (language != "Default")
-                language = language += "\\";
-
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\lang\" + language + "cargo_translate.txt"))
-                language = "";
-                */
             try
             {
                 using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\lang\Default\cargo_translate.txt", true))
@@ -834,9 +813,7 @@ namespace TS_SE_Tool
                 }
                 else if (tempProfileFileInMemory != null)
                 {
-                    //LastModifiedTimestamp = File.GetLastWriteTime(SiiInfoPath);
-                    //textBoxDynamic.Text += LastModifiedTimestamp.ToString();
-                    CheckProfileInfoData();
+                    SFProfileData.Prepare(tempProfileFileInMemory);
                 }
             }
 
@@ -891,9 +868,6 @@ namespace TS_SE_Tool
                 else if (tempInfoFileInMemory != null)
                 {   
                     CheckSaveInfoData();
-
-                    //SavefileInfoData InfoData = new SavefileInfoData();
-                    //InfoData.PrepareInfo(tempInfoFileInMemory);
                 }
             }
 
@@ -1048,7 +1022,8 @@ namespace TS_SE_Tool
                 else if (tempProfileFileInMemory != null)
                 {
                     ShowStatusMessages("clear","");
-                    CheckProfileInfoData();
+                    //CheckProfileInfoData();
+                    SFProfileData.Prepare(tempProfileFileInMemory);
                 }
             }
 
@@ -2125,7 +2100,7 @@ namespace TS_SE_Tool
             }
         }
 
-        public void WriteInfoFile(string[] _infoFile, string _filePath, SavefileInfoData _infoData)
+        public void WriteInfoFile(string[] _infoFile, string _filePath, SaveFileInfoData _infoData)
         {
             using (StreamWriter writer = new StreamWriter(_filePath, true))
             {

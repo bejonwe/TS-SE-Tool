@@ -19,28 +19,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TS_SE_Tool.CustomClasses
+namespace TS_SE_Tool
 {
-    public class UserCompanyTruckDataPart
+    public class UserCompanyDriverData
     {
-        public UserCompanyTruckDataPart()
+        public UserCompanyDriverData()
         {
 
         }
 
-        public UserCompanyTruckDataPart(string _PartType)
-        {
-            PartType = _PartType;
-        }
-
-        public UserCompanyTruckDataPart(string _PartType, string _PartNameless)
-        {
-            PartType = _PartType;
-            PartNameless = _PartNameless;
-        }
-
-        public string PartNameless { get; set; } = "";
-        public List<string> PartData { get; set; } = new List<string>();
-        public string PartType { get; set; } = "";
+        //public string DriverName { get; set; } = null;
+        public int DriverReadiness { get; set; } = 0;
+        public bool DriverQuitWarned { get; set; } = false;
     }
 }
